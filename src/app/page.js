@@ -199,7 +199,10 @@ export default function StudioPage() {
           setReportId(data.id);
           setGeneratingStatus("success");
         } catch (e) {
-          console.error("Failed to parse reportData directly, falling back to poll:", e);
+          console.error(
+            "Failed to parse reportData directly, falling back to poll:",
+            e,
+          );
           pollResult(data.id);
         }
       } else {
@@ -239,13 +242,17 @@ export default function StudioPage() {
                 console.error("Failed to parse polled reportData:", e);
                 // If it is completed but cannot parse, we check if it is the last attempt
                 if (attempts >= maxAttempts) {
-                  setGeneratingError("AI visibility check report could not be parsed. Please try again.");
+                  setGeneratingError(
+                    "AI visibility check report could not be parsed. Please try again.",
+                  );
                   setGeneratingStatus("error");
                   completed = true;
                 }
               }
             } else {
-              console.warn("Report status is completed but reportData is empty. Retrying...");
+              console.warn(
+                "Report status is completed but reportData is empty. Retrying...",
+              );
             }
           } else if (data.status === "failed") {
             setGeneratingError(
@@ -267,7 +274,6 @@ export default function StudioPage() {
       setGeneratingStatus("error");
     }
   };
-
 
   const handleDownload = () => {
     if (!result) return;
@@ -294,7 +300,7 @@ export default function StudioPage() {
       return {
         text: "Sign in with Google",
         className:
-          "w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-violet-500/20 active:scale-[0.99]",
+          "w-full bg-primary hover:bg-primary-hover text-white rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-primary/20 active:scale-[0.99]",
         icon: <FaSearch className="text-xs text-white animate-pulse" />,
         disabled: false,
       };
@@ -304,8 +310,10 @@ export default function StudioPage() {
       return {
         text: `Analyzing... (${elapsedSeconds}s)`,
         className:
-          "w-full bg-zinc-900 border border-zinc-800 text-zinc-500 rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-not-allowed opacity-60",
-        icon: <FaSpinner className="animate-spin text-xs text-zinc-500" />,
+          "w-full bg-bg-card border border-divider text-secondary-text rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-not-allowed opacity-60",
+        icon: (
+          <FaSpinner className="animate-spin text-xs text-secondary-text" />
+        ),
         disabled: true,
       };
     }
@@ -314,8 +322,8 @@ export default function StudioPage() {
       return {
         text: "Enter URL & Keyword to Begin",
         className:
-          "w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700/60 rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
-        icon: <FaGlobe className="text-xs text-zinc-400" />,
+          "w-full bg-bg-card hover:bg-bg-card-hover text-primary-text border border-divider rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
+        icon: <FaGlobe className="text-xs text-secondary-text" />,
         disabled: false,
       };
     }
@@ -324,8 +332,8 @@ export default function StudioPage() {
       return {
         text: "Enter Website URL",
         className:
-          "w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700/60 rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
-        icon: <FaGlobe className="text-xs text-zinc-400" />,
+          "w-full bg-bg-card hover:bg-bg-card-hover text-primary-text border border-divider rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
+        icon: <FaGlobe className="text-xs text-secondary-text" />,
         disabled: false,
       };
     }
@@ -334,8 +342,8 @@ export default function StudioPage() {
       return {
         text: "Enter Search Keyword",
         className:
-          "w-full bg-zinc-800 hover:bg-zinc-700 text-zinc-300 border border-zinc-700/60 rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
-        icon: <FaSearch className="text-xs text-zinc-400" />,
+          "w-full bg-bg-card hover:bg-bg-card-hover text-primary-text border border-divider rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99]",
+        icon: <FaSearch className="text-xs text-secondary-text" />,
         disabled: false,
       };
     }
@@ -343,7 +351,7 @@ export default function StudioPage() {
     return {
       text: "Run AI Visibility Audit (18 Credits)",
       className:
-        "w-full bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-violet-500/20 active:scale-[0.99]",
+        "w-full bg-primary hover:bg-primary-hover text-white rounded py-3.5 text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-primary/20 active:scale-[0.99]",
       icon: <FaSearch className="text-xs text-white animate-pulse" />,
       disabled: false,
     };
@@ -352,7 +360,7 @@ export default function StudioPage() {
   const btn = getButtonContent();
 
   return (
-    <div className="flex-1 bg-zinc-950 text-zinc-100 font-sans overflow-y-auto relative selection:bg-violet-600/30">
+    <div className="flex-1 bg-bg-page text-primary-text font-sans overflow-y-auto relative selection:bg-primary/30">
       {/* ──────────────────────────────────────────────────────────────────────── */}
       {/* 🔮 STATE A: INITIAL SEARCH PORTAL */}
       {/* ──────────────────────────────────────────────────────────────────────── */}
@@ -360,17 +368,17 @@ export default function StudioPage() {
         <div className="max-w-4xl mx-auto px-4 py-16 sm:py-24 relative z-10 flex flex-col items-center">
           {/* Hero Branding */}
           <div className="text-center space-y-4 max-w-2xl mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-900/30 border border-violet-800/40 text-violet-300 text-[10px] font-bold uppercase tracking-wider">
-              <FaGlobe className="animate-spin duration-3000 text-violet-400" />{" "}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider">
+              <FaGlobe className="animate-spin duration-3000 text-primary" />{" "}
               Generative Engine Optimization (GEO)
             </div>
-            <h1 className="text-4xl sm:text-5xl font-black font-heading text-white tracking-tight leading-none">
+            <h1 className="text-4xl sm:text-5xl font-black font-heading text-primary-text tracking-tight leading-none">
               Is Your Landing Page <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-hover">
                 Visible in AI Search?
               </span>
             </h1>
-            <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-medium">
+            <p className="text-sm sm:text-base text-secondary-text leading-relaxed font-medium">
               Audit search visibility and citation index parameters. Instantly
               evaluate how ChatGPT Search, Perplexity, and Google AI Overviews
               structure, credit, and read your page content.
@@ -378,26 +386,26 @@ export default function StudioPage() {
           </div>
 
           {/* Centered Search-Console Card */}
-          <div className="w-full bg-zinc-900/50 border border-zinc-800 rounded p-6 sm:p-8 backdrop-blur-md shadow-2xl space-y-6">
+          <div className="w-full bg-bg-card/50 border border-divider/50 rounded p-6 sm:p-8 backdrop-blur-md shadow-2xl space-y-6">
             {/* Split Input Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* URL Field */}
               <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <FaLink className="text-violet-400 text-[9px]" /> 1. Website
-                  URL to Audit
+                <label className="text-[10px] font-bold text-secondary-text uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <FaLink className="text-primary text-[9px]" /> 1. Website URL
+                  to Audit
                 </label>
                 <div
                   className={clsx(
-                    "relative flex items-center bg-zinc-950/80 border rounded transition-all duration-200",
+                    "relative flex items-center bg-bg-page/80 border rounded transition-all duration-200",
                     generatingStatus === "error" &&
                       !url &&
                       generatingError.toLowerCase().includes("url")
                       ? "border-red-500/80 bg-red-950/10 shadow-lg shadow-red-950/20 animate-pulse"
-                      : "border-zinc-800 hover:border-zinc-700 focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-500/35",
+                      : "border-divider/50 hover:border-divider focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/35",
                   )}
                 >
-                  <span className="text-xs text-zinc-500 pl-4 select-none font-bold">
+                  <span className="text-xs text-secondary-text pl-4 select-none font-bold">
                     https://
                   </span>
                   <input
@@ -405,7 +413,7 @@ export default function StudioPage() {
                     placeholder="example.com"
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    className="w-full bg-transparent border-0 text-xs font-semibold py-4 pl-1 pr-4 text-white placeholder-zinc-650 focus:outline-none focus:ring-0"
+                    className="w-full bg-transparent border-0 text-xs font-semibold py-4 pl-1 pr-4 text-primary-text placeholder-secondary-text/40 focus:outline-none focus:ring-0"
                   />
                 </div>
                 {generatingStatus === "error" &&
@@ -420,18 +428,18 @@ export default function StudioPage() {
 
               {/* Keyword Field */}
               <div className="flex flex-col">
-                <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                  <FaSearch className="text-violet-400 text-[9px]" /> 2. Target
+                <label className="text-[10px] font-bold text-secondary-text uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <FaSearch className="text-primary text-[9px]" /> 2. Target
                   Search Query / Niche
                 </label>
                 <div
                   className={clsx(
-                    "relative flex items-center bg-zinc-950/80 border rounded transition-all duration-200",
+                    "relative flex items-center bg-bg-page/80 border rounded transition-all duration-200",
                     generatingStatus === "error" &&
                       !keyword &&
                       generatingError.toLowerCase().includes("keyword")
                       ? "border-red-500/80 bg-red-950/10 shadow-lg shadow-red-950/20 animate-pulse"
-                      : "border-zinc-800 hover:border-zinc-700 focus-within:border-violet-500 focus-within:ring-1 focus-within:ring-violet-500/35",
+                      : "border-divider/50 hover:border-divider focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/35",
                   )}
                 >
                   <input
@@ -439,7 +447,7 @@ export default function StudioPage() {
                     placeholder="e.g., best task manager for engineering startups"
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
-                    className="w-full bg-transparent border-0 text-xs font-semibold py-4 px-4 text-white placeholder-zinc-650 focus:outline-none focus:ring-0"
+                    className="w-full bg-transparent border-0 text-xs font-semibold py-4 px-4 text-primary-text placeholder-secondary-text/40 focus:outline-none focus:ring-0"
                   />
                 </div>
                 {generatingStatus === "error" &&
@@ -455,7 +463,7 @@ export default function StudioPage() {
 
             {/* AI Search Engines Selection */}
             <div className="flex flex-col">
-              <label className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-3">
+              <label className="text-[10px] font-bold text-secondary-text uppercase tracking-wider mb-3">
                 3. Choose Target AI Search Engines to Evaluate
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3">
@@ -469,21 +477,21 @@ export default function StudioPage() {
                       className={clsx(
                         "p-3 rounded border text-[11px] flex flex-col justify-between items-start transition-all cursor-pointer text-left h-20",
                         checked
-                          ? "bg-violet-600/10 border-violet-500 text-white font-bold shadow-lg shadow-violet-500/5"
-                          : "bg-zinc-950/80 border-zinc-800 text-zinc-400 hover:bg-zinc-900/60 hover:text-white",
+                          ? "bg-primary/10 border-primary text-primary-text font-bold shadow-lg shadow-primary/5"
+                          : "bg-bg-page/80 border-divider/50 text-secondary-text hover:bg-bg-card-hover hover:text-primary-text",
                       )}
                     >
                       <span className="font-semibold block">{eng.name}</span>
                       <div className="flex justify-between items-center w-full mt-1">
-                        <span className="text-[8px] text-zinc-500 leading-tight font-medium line-clamp-1">
+                        <span className="text-[8px] text-secondary-text leading-tight font-medium line-clamp-1">
                           {eng.desc}
                         </span>
                         <div
                           className={clsx(
                             "h-3.5 w-3.5 rounded border flex items-center justify-center text-[7px] flex-shrink-0 ml-1.5",
                             checked
-                              ? "bg-violet-500 border-violet-400 text-white"
-                              : "border-zinc-700 bg-zinc-900",
+                              ? "bg-primary border-primary-hover text-white"
+                              : "border-divider/50 bg-bg-page",
                           )}
                         >
                           {checked && "✓"}
@@ -496,11 +504,11 @@ export default function StudioPage() {
             </div>
 
             {/* Advanced Toggle Controls */}
-            <div className="border-t border-zinc-800/80 pt-4">
+            <div className="border-t border-divider/50 pt-4">
               <button
                 type="button"
                 onClick={() => setShowAdvanced(!showAdvanced)}
-                className="flex items-center gap-1.5 text-[10px] font-bold text-zinc-400 hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-[10px] font-bold text-secondary-text hover:text-primary-text uppercase tracking-wider transition-colors cursor-pointer"
               >
                 <span>Advanced Crawler Rules Settings</span>
                 <FaChevronDown
@@ -513,12 +521,12 @@ export default function StudioPage() {
 
               {showAdvanced && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 animate-in fade-in duration-200">
-                  <div className="flex items-center justify-between p-3.5 bg-zinc-950/80 border border-zinc-800 rounded">
+                  <div className="flex items-center justify-between p-3.5 bg-bg-page/80 border border-divider/50 rounded">
                     <div>
-                      <span className="text-xs font-bold text-white block">
+                      <span className="text-xs font-bold text-primary-text block">
                         Prioritize Reasoning Depth
                       </span>
-                      <span className="text-[9px] text-zinc-500 leading-none block mt-0.5">
+                      <span className="text-[9px] text-secondary-text leading-none block mt-0.5">
                         Applies slower deep-reasoning chains
                       </span>
                     </div>
@@ -527,7 +535,7 @@ export default function StudioPage() {
                       onClick={() => setUseReasoning(!useReasoning)}
                       className={clsx(
                         "relative inline-flex h-6.5 w-11.5 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none",
-                        useReasoning ? "bg-violet-600" : "bg-zinc-800",
+                        useReasoning ? "bg-primary" : "bg-divider/50",
                       )}
                     >
                       <span
@@ -539,12 +547,12 @@ export default function StudioPage() {
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between p-3.5 bg-zinc-950/80 border border-zinc-800 rounded">
+                  <div className="flex items-center justify-between p-3.5 bg-bg-page/80 border border-divider/50 rounded">
                     <div>
-                      <span className="text-xs font-bold text-white block">
+                      <span className="text-xs font-bold text-primary-text block">
                         Audit Structured Schema
                       </span>
-                      <span className="text-[9px] text-zinc-500 leading-none block mt-0.5">
+                      <span className="text-[9px] text-secondary-text leading-none block mt-0.5">
                         Validates JSON-LD semantic models
                       </span>
                     </div>
@@ -553,7 +561,7 @@ export default function StudioPage() {
                       onClick={() => setCheckSchema(!checkSchema)}
                       className={clsx(
                         "relative inline-flex h-6.5 w-11.5 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none",
-                        checkSchema ? "bg-violet-600" : "bg-zinc-800",
+                        checkSchema ? "bg-primary" : "bg-divider/50",
                       )}
                     >
                       <span
@@ -569,10 +577,10 @@ export default function StudioPage() {
             </div>
 
             {/* Launch Action triggers */}
-            <div className="border-t border-zinc-800/80 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="border-t border-divider/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Cost & Credits warning display */}
               <div className="flex flex-col sm:items-start text-center sm:text-left">
-                <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">
+                <span className="text-[10px] text-secondary-text font-bold uppercase tracking-wider">
                   Audit cost: 18 credits
                 </span>
                 <span className="text-[11px] text-amber-300 font-bold flex items-center justify-center sm:justify-start gap-1.5 mt-1 bg-amber-950/20 border border-amber-800/30 px-3 py-1 rounded-full">
@@ -626,34 +634,36 @@ export default function StudioPage() {
       {/* ──────────────────────────────────────────────────────────────────────── */}
       {generatingStatus === "generating" && (
         <div className="max-w-xl mx-auto px-4 py-24 sm:py-32 relative z-10 flex flex-col items-center justify-center min-h-[70vh]">
-          <div className="w-full bg-zinc-900/50 border border-zinc-800 rounded p-8 backdrop-blur-md shadow-2xl flex flex-col items-center text-center space-y-6">
+          <div className="w-full bg-bg-card/50 border border-divider/50 rounded p-8 backdrop-blur-md shadow-2xl flex flex-col items-center text-center space-y-6">
             <div className="relative flex items-center justify-center">
-              <div className="h-20 w-20 rounded-full border-4 border-dashed border-violet-500 animate-spin" />
-              <FaGlobe className="absolute text-2xl text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400 animate-bounce" />
+              <div className="h-20 w-20 rounded-full border-4 border-dashed border-primary animate-spin" />
+              <FaGlobe className="absolute text-2xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-hover animate-bounce" />
             </div>
 
             <div className="space-y-2">
               <h2 className="text-lg font-heading font-black text-white">
                 Running GEO Auditor Core...
               </h2>
-              <p className="text-xs text-violet-400 font-semibold tracking-wider uppercase animate-pulse">
+              <p className="text-xs text-primary font-semibold tracking-wider uppercase animate-pulse">
                 {loaderTexts[loaderIndex]}
               </p>
             </div>
 
-            <div className="h-1.5 w-full bg-zinc-950 rounded-full overflow-hidden border border-zinc-800/80">
+            <div className="h-1.5 w-full bg-bg-page rounded-full overflow-hidden border border-divider/50">
               <div
-                className="h-full bg-gradient-to-r from-violet-600 to-fuchsia-600 transition-all duration-300 ease-out"
+                className="h-full bg-gradient-to-r from-primary to-primary-hover transition-all duration-300 ease-out"
                 style={{
                   width: `${Math.min((elapsedSeconds / 15) * 100, 95)}%`,
                 }}
               />
             </div>
 
-            <p className="text-[10px] text-zinc-500 leading-relaxed max-w-xs">
+            <p className="text-[10px] text-secondary-text leading-relaxed max-w-xs">
               Simulating crawling profiles and calculating keyword citation
               depth. Time elapsed:{" "}
-              <span className="font-bold text-zinc-300">{elapsedSeconds}s</span>
+              <span className="font-bold text-primary-text">
+                {elapsedSeconds}s
+              </span>
               . Max wait limit is 15s.
             </p>
           </div>
@@ -666,36 +676,36 @@ export default function StudioPage() {
       {generatingStatus === "success" && result && (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 space-y-8 animate-in fade-in duration-300">
           {/* Dashboard Sticky Sub-Header Nav */}
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-zinc-900/60 border border-zinc-800 rounded p-5 backdrop-blur-md shadow-lg">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-bg-card/60 border border-divider/50 rounded-2xl p-5 backdrop-blur-md shadow-lg">
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold text-violet-400 bg-violet-950 border border-violet-850 px-2 py-0.5 rounded uppercase">
+                <span className="text-[10px] font-bold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded uppercase">
                   GEO Report Output
                 </span>
-                <span className="text-xs text-zinc-500">
+                <span className="text-xs text-secondary-text">
                   #{reportId.slice(-6)}
                 </span>
               </div>
-              <h2 className="text-lg font-black text-white mt-1.5 truncate flex items-center gap-1.5">
-                <FaGlobe className="text-zinc-500 text-sm" />
+              <h2 className="text-lg font-black text-primary-text mt-1.5 truncate flex items-center gap-1.5">
+                <FaGlobe className="text-secondary-text text-sm" />
                 <span>{url}</span>
               </h2>
-              <p className="text-xs text-zinc-400 mt-1 font-medium truncate">
+              <p className="text-xs text-secondary-text mt-1 font-medium truncate">
                 Target Search Query:{" "}
-                <span className="text-zinc-200">"{keyword}"</span>
+                <span className="text-primary-text">"{keyword}"</span>
               </p>
             </div>
 
             <div className="flex items-center gap-3 flex-shrink-0">
               <button
                 onClick={handleReset}
-                className="flex items-center gap-1.5 px-4.5 py-2.5 bg-zinc-950 border border-zinc-800 text-zinc-300 hover:text-white rounded text-xs font-bold transition-all cursor-pointer hover:bg-zinc-900"
+                className="flex items-center gap-1.5 px-4.5 py-2.5 bg-bg-page border border-divider/50 text-secondary-text hover:text-primary-text rounded text-xs font-bold transition-all cursor-pointer hover:bg-bg-card-hover"
               >
                 <FaUndo className="text-[10px]" /> New Audit
               </button>
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-1.5 px-4.5 py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white rounded text-xs font-bold transition-all cursor-pointer shadow-lg shadow-violet-500/10 hover:scale-[1.01]"
+                className="flex items-center gap-1.5 px-4.5 py-2.5 bg-primary hover:bg-primary-hover text-white rounded text-xs font-bold transition-all cursor-pointer shadow-lg shadow-primary/20 hover:scale-[1.01]"
               >
                 <FaDownload className="text-[10px]" /> Export JSON
               </button>
@@ -705,15 +715,15 @@ export default function StudioPage() {
           {/* Top Row: Score Gauges Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Gauge 1: Main Visibility Score */}
-            <div className="bg-zinc-900/40 border border-zinc-800 rounded p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
-              <div className="absolute inset-0 bg-violet-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="bg-bg-card/40 border border-divider/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="relative h-28 w-28 flex items-center justify-center">
                 <svg className="absolute inset-0 w-full h-full transform -rotate-90">
                   <circle
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-zinc-800"
+                    className="stroke-divider/30"
                     strokeWidth="8"
                     fill="transparent"
                   />
@@ -721,7 +731,7 @@ export default function StudioPage() {
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-violet-500"
+                    className="stroke-primary"
                     strokeWidth="8"
                     fill="transparent"
                     strokeDasharray={2 * Math.PI * 46}
@@ -733,32 +743,32 @@ export default function StudioPage() {
                   />
                 </svg>
                 <div className="flex flex-col items-center justify-center z-10">
-                  <span className="text-2xl font-black text-white">
+                  <span className="text-2xl font-black text-primary-text">
                     {result.visibility_score}%
                   </span>
-                  <span className="text-[7px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">
+                  <span className="text-[7px] font-bold text-secondary-text uppercase tracking-widest mt-0.5">
                     Visibility
                   </span>
                 </div>
               </div>
-              <h3 className="text-xs font-bold text-white mt-4 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-primary-text mt-4 uppercase tracking-wider">
                 AI Search Visibility
               </h3>
-              <p className="text-[9px] text-zinc-400 mt-1 leading-relaxed">
+              <p className="text-[9px] text-secondary-text mt-1 leading-relaxed">
                 Overall citation coverage and recall index across engines
               </p>
             </div>
 
             {/* Gauge 2: E-E-A-T Quality */}
-            <div className="bg-zinc-900/40 border border-zinc-800 rounded p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
-              <div className="absolute inset-0 bg-fuchsia-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="bg-bg-card/40 border border-divider/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="relative h-28 w-28 flex items-center justify-center">
                 <svg className="absolute inset-0 w-full h-full transform -rotate-90">
                   <circle
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-zinc-800"
+                    className="stroke-divider/30"
                     strokeWidth="8"
                     fill="transparent"
                   />
@@ -766,7 +776,7 @@ export default function StudioPage() {
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-fuchsia-500"
+                    className="stroke-primary"
                     strokeWidth="8"
                     fill="transparent"
                     strokeDasharray={2 * Math.PI * 46}
@@ -778,32 +788,32 @@ export default function StudioPage() {
                   />
                 </svg>
                 <div className="flex flex-col items-center justify-center z-10">
-                  <span className="text-2xl font-black text-white">
+                  <span className="text-2xl font-black text-primary-text">
                     {result.eeat_score}%
                   </span>
-                  <span className="text-[7px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">
+                  <span className="text-[7px] font-bold text-secondary-text uppercase tracking-widest mt-0.5">
                     E-E-A-T
                   </span>
                 </div>
               </div>
-              <h3 className="text-xs font-bold text-white mt-4 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-primary-text mt-4 uppercase tracking-wider">
                 E-E-A-T Authority
               </h3>
-              <p className="text-[9px] text-zinc-400 mt-1 leading-relaxed">
+              <p className="text-[9px] text-secondary-text mt-1 leading-relaxed">
                 Expertise, authoritativeness, and trust signals profile
               </p>
             </div>
 
             {/* Gauge 3: Citation Likelihood */}
-            <div className="bg-zinc-900/40 border border-zinc-800 rounded p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
-              <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="bg-bg-card/40 border border-divider/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="relative h-28 w-28 flex items-center justify-center">
                 <svg className="absolute inset-0 w-full h-full transform -rotate-90">
                   <circle
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-zinc-800"
+                    className="stroke-divider/30"
                     strokeWidth="8"
                     fill="transparent"
                   />
@@ -811,7 +821,7 @@ export default function StudioPage() {
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-blue-500"
+                    className="stroke-primary"
                     strokeWidth="8"
                     fill="transparent"
                     strokeDasharray={2 * Math.PI * 46}
@@ -823,32 +833,32 @@ export default function StudioPage() {
                   />
                 </svg>
                 <div className="flex flex-col items-center justify-center z-10">
-                  <span className="text-2xl font-black text-white">
+                  <span className="text-2xl font-black text-primary-text">
                     {result.citation_likelihood}%
                   </span>
-                  <span className="text-[7px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">
+                  <span className="text-[7px] font-bold text-secondary-text uppercase tracking-widest mt-0.5">
                     Citation
                   </span>
                 </div>
               </div>
-              <h3 className="text-xs font-bold text-white mt-4 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-primary-text mt-4 uppercase tracking-wider">
                 Citation Likelihood
               </h3>
-              <p className="text-[9px] text-zinc-400 mt-1 leading-relaxed">
+              <p className="text-[9px] text-secondary-text mt-1 leading-relaxed">
                 Probability of being referenced or quoted in answers
               </p>
             </div>
 
             {/* Gauge 4: Content Readability */}
-            <div className="bg-zinc-900/40 border border-zinc-800 rounded p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
-              <div className="absolute inset-0 bg-emerald-600/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="bg-bg-card/40 border border-divider/50 rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg relative group overflow-hidden">
+              <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               <div className="relative h-28 w-28 flex items-center justify-center">
                 <svg className="absolute inset-0 w-full h-full transform -rotate-90">
                   <circle
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-zinc-800"
+                    className="stroke-divider/30"
                     strokeWidth="8"
                     fill="transparent"
                   />
@@ -856,7 +866,7 @@ export default function StudioPage() {
                     cx="56"
                     cy="56"
                     r="46"
-                    className="stroke-emerald-500"
+                    className="stroke-primary"
                     strokeWidth="8"
                     fill="transparent"
                     strokeDasharray={2 * Math.PI * 46}
@@ -868,29 +878,29 @@ export default function StudioPage() {
                   />
                 </svg>
                 <div className="flex flex-col items-center justify-center z-10">
-                  <span className="text-2xl font-black text-white">
+                  <span className="text-2xl font-black text-primary-text">
                     {result.readability_score}%
                   </span>
-                  <span className="text-[7px] font-bold text-zinc-500 uppercase tracking-widest mt-0.5">
+                  <span className="text-[7px] font-bold text-secondary-text uppercase tracking-widest mt-0.5">
                     Readability
                   </span>
                 </div>
               </div>
-              <h3 className="text-xs font-bold text-white mt-4 uppercase tracking-wider">
+              <h3 className="text-xs font-bold text-primary-text mt-4 uppercase tracking-wider">
                 Content Readability
               </h3>
-              <p className="text-[9px] text-zinc-400 mt-1 leading-relaxed">
+              <p className="text-[9px] text-secondary-text mt-1 leading-relaxed">
                 Syntax simplicity and semantic indexing index
               </p>
             </div>
           </div>
 
           {/* Row 2: Summary Card */}
-          <div className="bg-zinc-900/30 border border-zinc-800 rounded p-6 shadow-md">
-            <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block mb-2">
+          <div className="bg-bg-card/30 border border-divider/50 rounded-2xl p-6 shadow-md">
+            <span className="text-[10px] font-bold text-secondary-text uppercase tracking-wider block mb-2">
               Executive Summary Statement
             </span>
-            <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-medium font-sans">
+            <p className="text-xs sm:text-sm text-primary-text leading-relaxed font-medium font-sans">
               {result.summary}
             </p>
           </div>
@@ -898,17 +908,17 @@ export default function StudioPage() {
           {/* Row 3: Strengths & Weaknesses Grids */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Strengths Card */}
-            <div className="bg-zinc-900/30 border border-zinc-800 rounded p-6 space-y-4">
-              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block border-b border-zinc-800 pb-2.5">
+            <div className="bg-bg-card/30 border border-divider/50 rounded-2xl p-6 space-y-4">
+              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider block border-b border-divider/50 pb-2.5">
                 ✓ AI Citation Strengths
               </span>
               <ul className="space-y-3">
                 {result.strengths?.map((str, idx) => (
                   <li
                     key={idx}
-                    className="text-xs text-zinc-300 flex items-start gap-3 leading-relaxed font-medium"
+                    className="text-xs text-primary-text flex items-start gap-3 leading-relaxed font-medium"
                   >
-                    <span className="h-5 w-5 rounded-full bg-emerald-950/80 text-emerald-500 border border-emerald-900/35 flex items-center justify-center text-[9px] flex-shrink-0 font-bold mt-0.5">
+                    <span className="h-5 w-5 rounded-full bg-emerald-955/20 text-emerald-455 border border-emerald-900/35 flex items-center justify-center text-[9px] flex-shrink-0 font-bold mt-0.5">
                       ✓
                     </span>
                     <span>{str}</span>
@@ -918,17 +928,17 @@ export default function StudioPage() {
             </div>
 
             {/* Weaknesses Card */}
-            <div className="bg-zinc-900/30 border border-zinc-800 rounded p-6 space-y-4">
-              <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block border-b border-zinc-800 pb-2.5">
+            <div className="bg-bg-card/30 border border-divider/50 rounded-2xl p-6 space-y-4">
+              <span className="text-[10px] font-bold text-red-400 uppercase tracking-wider block border-b border-divider/50 pb-2.5">
                 ✕ AI Visibility Gaps
               </span>
               <ul className="space-y-3">
                 {result.weaknesses?.map((weak, idx) => (
                   <li
                     key={idx}
-                    className="text-xs text-zinc-300 flex items-start gap-3 leading-relaxed font-medium"
+                    className="text-xs text-primary-text flex items-start gap-3 leading-relaxed font-medium"
                   >
-                    <span className="h-5 w-5 rounded-full bg-red-950/80 text-red-500 border border-red-900/35 flex items-center justify-center text-[9px] flex-shrink-0 font-bold mt-0.5">
+                    <span className="h-5 w-5 rounded-full bg-red-955/20 text-red-455 border border-red-900/35 flex items-center justify-center text-[9px] flex-shrink-0 font-bold mt-0.5">
                       ✕
                     </span>
                     <span>{weak}</span>
@@ -941,41 +951,41 @@ export default function StudioPage() {
           {/* Row 4: Split Technical Signals and Recommendations */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Technical Crawler card (1 Col) */}
-            <div className="lg:col-span-1 bg-zinc-900/30 border border-zinc-800 rounded p-6 flex flex-col justify-between">
+            <div className="lg:col-span-1 bg-bg-card/30 border border-divider/50 rounded-2xl p-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block border-b border-zinc-800 pb-2.5">
+                <span className="text-[10px] font-bold text-secondary-text uppercase tracking-wider block border-b border-divider/50 pb-2.5">
                   Technical Crawler Signals
                 </span>
                 <div className="space-y-4 mt-4 text-xs font-semibold">
-                  <div className="py-2 border-b border-zinc-800/60">
-                    <div className="text-zinc-500 text-[10px] uppercase font-bold flex items-center gap-1.5">
+                  <div className="py-2 border-b border-divider/30">
+                    <div className="text-secondary-text text-[10px] uppercase font-bold flex items-center gap-1.5">
                       <FaRobot /> Robots.txt
                     </div>
-                    <div className="text-zinc-200 mt-1.5 leading-relaxed font-medium">
+                    <div className="text-primary-text mt-1.5 leading-relaxed font-medium">
                       {result.technical_audit?.robots_txt}
                     </div>
                   </div>
-                  <div className="py-2 border-b border-zinc-800/60">
-                    <div className="text-zinc-500 text-[10px] uppercase font-bold flex items-center gap-1.5">
+                  <div className="py-2 border-b border-divider/30">
+                    <div className="text-secondary-text text-[10px] uppercase font-bold flex items-center gap-1.5">
                       <FaDatabase /> Structured Schema
                     </div>
-                    <div className="text-zinc-200 mt-1.5 leading-relaxed font-medium">
+                    <div className="text-primary-text mt-1.5 leading-relaxed font-medium">
                       {result.technical_audit?.schema_markup}
                     </div>
                   </div>
                   <div className="py-2">
-                    <div className="text-zinc-500 text-[10px] uppercase font-bold flex items-center gap-1.5">
+                    <div className="text-secondary-text text-[10px] uppercase font-bold flex items-center gap-1.5">
                       <FaLink /> Sitemap Directory
                     </div>
-                    <div className="text-zinc-200 mt-1.5 leading-relaxed font-medium">
+                    <div className="text-primary-text mt-1.5 leading-relaxed font-medium">
                       {result.technical_audit?.sitemap}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-zinc-800/80 pt-4 mt-4">
-                <div className="text-[10px] text-zinc-500 font-bold leading-normal">
+              <div className="border-t border-divider/50 pt-4 mt-4">
+                <div className="text-[10px] text-secondary-text font-bold leading-normal">
                   Crawler signals dictate how LLM search agent bots index,
                   reference, and tag semantic entities.
                 </div>
@@ -983,33 +993,33 @@ export default function StudioPage() {
             </div>
 
             {/* Recommendations Roadmap (2 Cols) */}
-            <div className="lg:col-span-2 bg-zinc-900/30 border border-zinc-800 rounded p-6 space-y-4">
-              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider block border-b border-zinc-800 pb-2.5">
+            <div className="lg:col-span-2 bg-bg-card/30 border border-divider/50 rounded-2xl p-6 space-y-4">
+              <span className="text-[10px] font-bold text-secondary-text uppercase tracking-wider block border-b border-divider/50 pb-2.5">
                 Actionable Optimization Roadmap
               </span>
               <div className="space-y-3">
                 {result.recommendations?.map((rec, idx) => (
                   <div
                     key={idx}
-                    className="p-4 bg-zinc-950/80 border border-zinc-800/80 rounded flex items-start gap-4 hover:border-zinc-700 transition-colors"
+                    className="p-4 bg-bg-page border border-divider/50 rounded-2xl flex items-start gap-4 hover:border-divider transition-colors"
                   >
                     <div
                       className={clsx(
                         "text-[9px] font-black uppercase tracking-wider px-2.5 py-1 rounded text-center flex-shrink-0 mt-0.5",
                         rec.priority === "High"
-                          ? "bg-red-950/20 text-red-400 border border-red-900/35"
+                          ? "bg-red-955/20 text-red-455 border border-red-900/30"
                           : rec.priority === "Medium"
-                            ? "bg-amber-950/20 text-amber-300 border border-amber-800/35"
-                            : "bg-zinc-900 text-zinc-400 border border-zinc-800",
+                            ? "bg-amber-955/20 text-amber-400 border border-amber-800/30"
+                            : "bg-bg-card text-secondary-text border border-divider/50",
                       )}
                     >
                       {rec.priority}
                     </div>
                     <div className="space-y-1">
-                      <div className="text-xs font-black text-white">
+                      <div className="text-xs font-black text-primary-text">
                         {rec.area}
                       </div>
-                      <div className="text-xs text-zinc-400 leading-relaxed font-medium">
+                      <div className="text-xs text-secondary-text leading-relaxed font-medium">
                         {rec.tips}
                       </div>
                     </div>

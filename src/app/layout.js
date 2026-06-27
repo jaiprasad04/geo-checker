@@ -7,11 +7,13 @@ import config from "@/lib/config";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -23,8 +25,8 @@ export default function RootLayout({ children }) {
   const theme = config?.theme || "slate-indigo";
 
   return (
-    <html lang="en" className="h-full w-full" data-theme={theme}>
-      <body className={`${inter.variable} ${outfit.variable} h-full w-full flex flex-col antialiased bg-bg-page text-primary-text font-sans overflow-hidden`}>
+    <html lang="en" className={`h-full w-full ${inter.variable} ${outfit.variable}`} data-theme={theme}>
+      <body className={`${inter.className} h-full w-full flex flex-col antialiased bg-bg-page text-primary-text font-sans overflow-hidden`}>
         <Providers>
           <Navbar />
           <div className="flex-1 flex flex-col overflow-hidden min-h-0">
