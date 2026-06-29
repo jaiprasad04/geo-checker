@@ -219,12 +219,9 @@ export default function StudioPage() {
 
   const pollResult = async (id) => {
     let completed = false;
-    let attempts = 0;
-    const maxAttempts = 20;
 
-    while (!completed && attempts < maxAttempts) {
+    while (!completed) {
       await new Promise((resolve) => setTimeout(resolve, 2500));
-      attempts++;
 
       try {
         const res = await fetch(`/api/creations?id=${id}`);
@@ -240,14 +237,11 @@ export default function StudioPage() {
                 completed = true;
               } catch (e) {
                 console.error("Failed to parse polled reportData:", e);
-                // If it is completed but cannot parse, we check if it is the last attempt
-                if (attempts >= maxAttempts) {
-                  setGeneratingError(
-                    "AI visibility check report could not be parsed. Please try again.",
-                  );
-                  setGeneratingStatus("error");
-                  completed = true;
-                }
+                setGeneratingError(
+                  "AI visibility check report could not be parsed. Please try again.",
+                );
+                setGeneratingStatus("error");
+                completed = true;
               }
             } else {
               console.warn(
@@ -265,13 +259,6 @@ export default function StudioPage() {
       } catch (err) {
         console.error("Error polling report status:", err);
       }
-    }
-
-    if (!completed) {
-      setGeneratingError(
-        "Audit is taking longer than expected. It will complete in the background and show in your gallery.",
-      );
-      setGeneratingStatus("error");
     }
   };
 
